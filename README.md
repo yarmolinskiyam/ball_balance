@@ -25,25 +25,32 @@ https://humandgears.ru/podshipnik-radialnyj-623zz
 - Заглушка торцевая 20 х 20, H17 
 https://www.soberizavod.ru/catalog/zaglushki_tortsevye_seriya_20/zaglushka_tortsevaya_20_kh_20_h17/?sphrase_id=294524
 
-## Электроника
+## Электроника на один набор
 
-- RS-25-5, Блок питания, 5В,5А,25Вт
+- [+] Arduino uno
+
+- [+] Драйвер мотора L298N
+
+- Мотор с энкодером
+
+- Дальномер Sharp 2шт
+
+- [+] RS-25-5, Блок питания, 5В,5А,25Вт
 https://www.chipdip.ru/product/rs-25-5
 770 руб = 5 шт. на сумму 3850 руб.
 
-- Блок питания 3а 36вт 12в ip20
+- [+] Блок питания 3а 36вт 12в ip20
 https://giant4.ru/catalog/bloki/36w-ip20-12v/
 663 руб = 5 шт. 3315 руб. 
 
-- Адресная лента WS2812b 144 led
+- [+] Адресная лента WS2812b 144 led
 https://giant4.ru/catalog/spi-lenta/ws2812b-144-ip33/
-1100 руб/м = 3м 3300 руб
+1100 руб/м = 3м 3300 руб.
+Тутор на светодиодку
+https://howtomechatronics.com/tutorials/arduino/how-to-control-ws2812b-individually-addressable-leds-using-arduino/
 
-- Arduino NANO или UNO
-- 
 
-Светодиодка 34w/m
-0.5м
-=
-17W -> 3.4A, 5V
+## misc
+Питалово
+Светодиодка 34w/m*0.5м = 17W -> 3.4A, 5V
 
