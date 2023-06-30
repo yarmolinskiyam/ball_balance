@@ -33,7 +33,7 @@ https://www.soberizavod.ru/catalog/zaglushki_tortsevye_seriya_20/zaglushka_torts
 
 - Мотор с энкодером
 
-- Дальномер Sharp 2шт
+- Дальномер Sharp/Sonar 2шт
 
 - [+] RS-25-5, Блок питания, 5В,5А,25Вт
 https://www.chipdip.ru/product/rs-25-5
