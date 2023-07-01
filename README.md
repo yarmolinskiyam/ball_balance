@@ -67,14 +67,16 @@ https://www.radetali.ru/catalog/product/shlejf-4kh0-3mm%C2%B2-awg22-rgb-4-22/
 96₽за 1 м  
 Сонары, энкодеры  
 Надо 0.5*3 + 0.5 ~=  
-2м на сборку.
+2м на сборку.  
+12м на все
 
 - Шлейф 3х0.82мм² AWG18 RGB-3/18
 https://www.radetali.ru/catalog/product/shlejf-3kh0-82mm%C2%B2-awg18-rgb-3-18/  
 110₽за 1 м  
 Светодиодка  
 Надо 0.5м+50% =  
-0.75м на сборку
+0.75м на сборку  
+4м на все
 
 <!-- - Шлейф 3х0.51мм² AWG20 WGR-3/20
 https://www.radetali.ru/catalog/product/shlejf-3kh0-51mm%C2%B2-awg20-wgr-3-20/
@@ -84,12 +86,14 @@ https://www.radetali.ru/catalog/product/shlejf-3kh0-51mm%C2%B2-awg20-wgr-3-20/
 - 3.415 Штекер АС 8 с выключателем, с подсветкой, на корпус, 250V, 6А (под отверстие 27х25мм)
 https://www.radetali.ru/catalog/product/3-415-shteker-as-8-vyklyuchatelem-podsvetkoj-korpus-250v-6a-pod-otverstie-27kh25mm/  
 175₽  
-1шт на сборку
+1шт на сборку  
+5шт на все
 
 - Шнур питания для бытовой техники 8, С7, 1.8m (2х0.75мм²) 5-180 PREMIER
 https://www.radetali.ru/catalog/product/shnur-pitaniya-dlya-bytovoj-tekhniki-8-s7-1-8m-2kh0-75mm%C2%B2-5-180-premier/  
 130₽за 1 шт.  
-1шт на сборку
+1шт на сборку  
+5шт на все
 
 <!-- - Шнур питания для бытовой техники 8, С7, 2.0m (2х0.25мм²)
 https://www.radetali.ru/catalog/product/shnur-pitaniya-dlya-bytovoj-tekhniki-8-s7-2-0m-2kh0-25mm%C2%B2/
@@ -98,7 +102,8 @@ https://www.radetali.ru/catalog/product/shnur-pitaniya-dlya-bytovoj-tekhniki-8-s
 - Площадка самоклеющаяся 20х14мм с крючком (10шт) 07-2320-10
 https://www.radetali.ru/catalog/product/ploschadka-samokleyuschayasya-20kh14mm-kryuchkom-10sht-07-2320-10/  
 120₽за 10 шт.  
-3шт на сборку
+3шт на сборку  
+3уп на все
 
 - HELUKABEL SiF провод монтажный, в силиконе, Cu 1х0.75мм², без галогенов, 300/500V, (–60°С до +180°С)
 https://www.radetali.ru/catalog/product/helukabel-sif-provod-montazhnyj-silikone-cu-1kh0-75mm%C2%B2-bez-galogenov-300-500v-%E2%80%9360-s-do-180-s/  
@@ -108,47 +113,60 @@ https://www.radetali.ru/catalog/product/helukabel-sif-provod-montazhnyj-silikone
 0.7м черный  
 0.7м желтый  
 0.5м синий  
-0.5м коричневый
+0.5м коричневый  
+.  
+На все:  
+4м черный  
+4м желтый  
+2.5м синий  
+2.5м коричневый
 
 ### ЧипИДип
 
 - [+] RS-25-5, Блок питания, 5В,5А,25Вт
 https://www.chipdip.ru/product/rs-25-5  
 770 руб = 5 шт. на сумму 3850 руб.  
-1шт на сборку
+1шт на сборку  
+5шт на все
 
 - PBS-10B-2 black, Кнопка без фиксации OFF-(ON) (1A 250VAC), черная
 https://www.chipdip.ru/product/pbs10b-2-black  
 50 руб.  
-1шт на сборку
+1шт на сборку  
+5шт на все
 
 - PBS-10B-2 blue, Кнопка без фиксации OFF-(ON) (1A 250VAC), синяя
 https://www.chipdip.ru/product/pbs10b-2-blue  
 44 руб.  
-1шт на сборку
+1шт на сборку  
+5шт на все
 
 - BLS-4 (DS1071-1x4), Гнездо на кабель 1х4 с контактами 2.54мм
 https://www.chipdip.ru/product/bls-4  
 11 руб.  
 Сонар со стороны сонара  
-2шт на сборку
+2шт на сборку  
+40шт на все
 
 - BLD-6 (DS1071 - 2x3), Гнездо на кабель 2х3 с контактами 2.54мм
 https://www.chipdip.ru/product/bld-6  
 11 руб  
 Сонар и энкодер со стороны ардуины  
-3шт на сборку
+3шт на сборку  
+60шт на все
 
 - BLS-3 (DS1071-1x3), Гнездо на кабель 1х3 с контактами 2.54мм
 https://www.chipdip.ru/product/bls-3  
 10 руб  
 Светодиодка  
-1шт на сборку
+1шт на сборку  
+40шт на все
 
 - G1025BF, Корпус для РЭА 225х113х63мм, пластик, черный с крепежным фланцем
 https://www.chipdip.ru/product/g1025bf  
 340 руб.  
-1шт на сборку
+1шт на сборку  
+5шт на все
 
 ## misc
 Питалово
