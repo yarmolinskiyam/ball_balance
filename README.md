@@ -100,11 +100,15 @@ https://www.radetali.ru/catalog/product/ploschadka-samokleyuschayasya-20kh14mm-k
 120₽за 10 шт.  
 3шт на сборку
 
-- Монтажный кабель красно-черный 2*0.75мм² CCA
-https://www.radetali.ru/catalog/product/montazhnyj-kabel-krasno-chernyj-2-0-75mm%C2%B2-cca/  
-32₽за 1 м.  
+- HELUKABEL SiF провод монтажный, в силиконе, Cu 1х0.75мм², без галогенов, 300/500V, (–60°С до +180°С)
+https://www.radetali.ru/catalog/product/helukabel-sif-provod-montazhnyj-silikone-cu-1kh0-75mm%C2%B2-bez-galogenov-300-500v-%E2%80%9360-s-do-180-s/  
+72₽за 1 м  
 Питание + мотор  
-1м на сборку
+На сборку:  
+0.7м черный  
+0.7м желтый  
+0.5м синий  
+0.5м коричневый
 
 ### ЧипИДип
 
