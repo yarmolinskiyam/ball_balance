@@ -27,6 +27,13 @@ https://www.soberizavod.ru/catalog/zaglushki_tortsevye_seriya_20/zaglushka_torts
 
 ## Электроника на один набор
 
+### MISC
+
+- Arduino sensor shield  
+    - 1шт цветной - ХАВ
+    - 2шт Sensor shield v5.0 - ресурсный набор из дома
+    - 1шт Sensor shield v4.0 - мой
+
 ### ХАВ
 
 - [+] Arduino uno
@@ -170,7 +177,17 @@ https://www.chipdip.ru/product/g1025bf
 1шт на сборку  
 5шт на все
 
+### RoboShop
+
+- Радиальный подшипник 623ZZ (80023)
+https://roboshop.spb.ru/3d-parts/podshipniki/radialnye-podshipniki/623zz  
+22.2 ₽
+
 ## misc
 Питалово
 Светодиодка 34w/m*0.5м = 17W -> 3.4A, 5V
 
+## Мат модель
+
+ИЗУЧЕНИЕ ДВИЖЕНИЯ ШАРА ПО НАКЛОННОМУ ЖЕЛОБУ
+http://genphys.phys.msu.ru/rus/lab/mech/Lab125_1.pdf
