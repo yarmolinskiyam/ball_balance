@@ -40,9 +40,9 @@ https://www.soberizavod.ru/catalog/zaglushki_tortsevye_seriya_20/zaglushka_torts
 
 - [+] Драйвер мотора L298N
 
-- Мотор с энкодером
+- [+] Мотор с энкодером
 
-- Дальномер Sharp/Sonar 2шт
+- [+] Дальномер Sharp/Sonar 2шт
 
 ### Авито
 
