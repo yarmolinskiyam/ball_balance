@@ -1,6 +1,7 @@
 #include <Arduino.h>
-#include <Ultrasonic.h>
 #include <ArduinoLog.h>
+
+#include "carriage.h"
 
 #define ARDUINO_LOGS_ENABLE_COLORS
 
@@ -12,7 +13,7 @@
 
 #define BUTTON 13
 
-Ultrasonic sonar (7, 6, 1000000/330);
+Carriage car (36, 6); /*!< Для получения координаты вагона */
 
 void setup()
 {
@@ -29,14 +30,9 @@ void setup()
 
 void loop()
 {
-  // uint32_t timeBefore = micros ();
-  // unsigned int distance = sonar.read ();
-  // uint32_t timeAfter = micros ();
+  int carX = car.getX ();
 
-  // if (distance > 40);
-  //   // Log.warning ("dist = %d cm" CR, distance);
-  // else
-  //   Log.notice ("dist = %d cm" CR, distance);
+  Log.notice ("carX = %d cm" CR, carX);
 
 
   // bool enc1 = digitalRead (ENC1);
@@ -45,6 +41,6 @@ void loop()
   // Log.notice ("%d %d\n", enc1, enc2);
 
 
-  digitalWrite (IN3, HIGH);
-  digitalWrite (IN4, digitalRead (BUTTON));
+  // digitalWrite (IN3, HIGH);
+  // digitalWrite (IN4, digitalRead (BUTTON));
 }
