@@ -4,7 +4,7 @@
 
 #define ARDUINO_LOGS_ENABLE_COLORS
 
-Ultrasonic sonar (6, 7, 1000000/330);
+Ultrasonic sonar (7, 6, 1000000/330);
 
 void setup()
 {
