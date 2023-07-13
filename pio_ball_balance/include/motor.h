@@ -55,6 +55,11 @@ public:
      * @brief Получить значение энкодера
     */
     int32_t getEncPos () { return encPos; }
+    
+    /**
+     * @brief Получить угол вала двигателя в радианах
+    */
+    float getAngleRad () { return encPos*6.2832f / (ticksPerRev * gearboxRatio); }
 
     /**
      * @brief Задать напряжение на двигателе
