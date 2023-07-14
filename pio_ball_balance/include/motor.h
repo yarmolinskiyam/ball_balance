@@ -9,6 +9,7 @@
 
 #include <stdint.h>
 #include <Arduino.h>
+#include <pid.h>
 
 /**
  * @brief Обработчик прерывания энкодера по первому пину
@@ -32,9 +33,13 @@ private:
     static const uint8_t enc2 = 3; /*!< Пин вывода 2 энкодера */
 
     static constexpr float supplyU = 12; /*!< Напряжение питания драйвера мотора */
+    static constexpr float Ts = 0.005; /*!< Период, с которым надо вызывать метод getAngleVel */
+    static constexpr float T = 0.03; /*!< Постоянная времени фильтра скорости */
 
     uint8_t ticksPerRev; /*!< Количество тиков энкодера на оборот */
     uint8_t gearboxRatio; /*!< Передаточное отношение редуктора */
+
+    PID *velFilter; /*!< Реальное дифференцирующее звено */
 
 public:
     
@@ -62,6 +67,13 @@ public:
     float getAngleRad () { return encPos*6.2832f / (ticksPerRev * gearboxRatio); }
 
     /**
+     * @brief Получить скорость двигателя в рад/с
+     * @return Скорость вала двигателя в рад/с
+     * @note Вызывать один раз каждые 5 мс
+     */
+    float getAngleVel ();
+
+    /**
      * @brief Задать напряжение на двигателе
      * @param [in] U Требуемое напряжение на двигателе в вольтах
     */
@@ -80,6 +92,9 @@ Motor::Motor (uint8_t ticksPerRev_, uint8_t gearboxRatio_)
 
     attachInterrupt (digitalPinToInterrupt (enc1), enc1Callback, CHANGE);
     attachInterrupt (digitalPinToInterrupt (enc2), enc2Callback, CHANGE);
+
+    static PID d (0, 0, 1, T, Ts);
+    velFilter = &d;
 }
 
 void Motor::tickEncoder (bool isEnc1)
@@ -104,6 +119,11 @@ void Motor::setU (float U)
         analogWrite (in3, pwm);
         digitalWrite (in4, LOW);
     }
+}
+
+float Motor::getAngleVel ()
+{
+    return velFilter->tick (getAngleRad ());
 }
 
 extern Motor motor;
