@@ -41,6 +41,9 @@ private:
 
     PID *velFilter; /*!< Реальное дифференцирующее звено */
 
+    float theta;
+    float theta_i;
+
 public:
     
     /**
@@ -60,18 +63,23 @@ public:
      * @brief Получить значение энкодера
     */
     int32_t getEncPos () { return encPos; }
+
+    /**
+     * @brief Обновить значения положения и скорости двигателя
+     * @note Вызывать один раз каждые 5 мс
+     */
+    void update ();
     
     /**
      * @brief Получить угол вала двигателя в радианах
     */
-    float getAngleRad () { return encPos*6.2832f / (ticksPerRev * gearboxRatio); }
+    float getAngleRad () { return theta; }
 
     /**
      * @brief Получить скорость двигателя в рад/с
      * @return Скорость вала двигателя в рад/с
-     * @note Вызывать один раз каждые 5 мс
      */
-    float getAngleVel ();
+    float getAngleVel () { return theta_i; }
 
     /**
      * @brief Задать напряжение на двигателе
@@ -121,19 +129,20 @@ void Motor::setU (float U)
     }
 }
 
-float Motor::getAngleVel ()
+void Motor::update ()
 {
-    return velFilter->tick (getAngleRad ());
+    theta = encPos*6.2832f / (ticksPerRev * gearboxRatio);
+    theta_i = velFilter->tick (theta);
 }
 
-extern Motor motor;
+extern Motor *motor;
 
 void enc1Callback ()
 {
-    motor.tickEncoder (true);
+    motor->tickEncoder (true);
 }
 
 void enc2Callback ()
 {
-    motor.tickEncoder (false);
+    motor->tickEncoder (false);
 }

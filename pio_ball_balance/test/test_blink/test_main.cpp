@@ -48,9 +48,9 @@ void loop()
   if (i < max_blinks)
   {
     RUN_TEST(test_led_state_high);
-    delay(500);
+    delay(10);
     RUN_TEST(test_led_state_low);
-    delay(500);
+    delay(10);
     i++;
   }
   else if (i == max_blinks)

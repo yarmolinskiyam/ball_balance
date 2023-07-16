@@ -21,13 +21,9 @@ private:
     long highLimit; /*!< Максимальное значение */
 
 public:
-    Slider(int pin, long lowLimit, long highLimit);
+    Slider(int pin, long low = 0, long high = 100);
 
-
-    // float mapfloat(float x, float in_min, float in_max, float out_min, float out_max)
-    // {
-    //     return (x - in_min) * (out_max - out_min) / (in_max - in_min) + out_min;
-    // }
+    void setSlider (long low, long high);
 
     /**
      * @brief Получить значение слайдера
@@ -47,3 +43,10 @@ Slider::Slider(int pin, long low, long high)
 
     pinMode (sliderPin, INPUT);
 }
+
+void Slider::setSlider (long low, long high)
+{
+    lowLimit = low;
+    highLimit = high;
+}
+

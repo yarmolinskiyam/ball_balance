@@ -1,44 +1,17 @@
 #include <Arduino.h>
-#include <ArduinoLog.h>
 
-#include "carriage.h"
-#include "motor.h"
-#include "slider.h"
-
-#define ARDUINO_LOGS_ENABLE_COLORS
-
-#define ENC1 2
-#define ENC2 3
-
-#define IN3 10
-#define IN4 11
+// #include "carriage.h"
+// #include "motor.h"
+// #include "slider.h"
+#include "overlord.h"
 
 #define BUTTON 13
-#define POT A0
 
-Carriage car (36, 6); /*!< Для получения координаты вагона */
-Motor motor (48, 47);
-Slider setPointSlider (A0, -400, 400);
-// Slider voltageSlider (A0, -12, 12);
+Overlord &overlord = Overlord::getInstance ();
 
-unsigned long timer;
-
-void setup()
+void controller (Overlord &over)
 {
-  Serial.begin (115200);
-  Log.begin(LOG_LEVEL_VERBOSE, &Serial);
-
-  pinMode (BUTTON, INPUT_PULLUP);
-
-  timer = micros ();
-}
-
-void loop()
-{
-  while (micros () - timer < 5000);
-  timer = micros ();
-
-  float setPoint = setPointSlider.getValue () * 0.001;
+  float setPoint = over.getSetpoint ();
   // bool button = !digitalRead (BUTTON);
   // float v = voltageSlider.getValue () * button;
 
@@ -49,23 +22,52 @@ void loop()
   static float constexpr Tk = T;
   static float constexpr Kk = T / (2*K*Tu);
 
-  static PID piVel (Kk, Kk/Tk, 0, 1, 0.005);
-  static PID pPos (1/ (2*2*Tu), 0, 0, 1, 0.005);
+  static float constexpr ia = 15/3;
+  static float constexpr g = 9.81;
 
+  float Tum = Tu;
 
-  float motorAngle = motor.getAngleRad ();
-  float motorVel = motor.getAngleVel ();
-  float u = piVel.tick (pPos.tick (setPoint - motorAngle) - motorVel);
+  static PID piVel (Kk, Kk/Tk, 0, 1, 0.005, -12, 12);
+  Tum *= 2;
+  static PID pPos (1/ (2*Tum), 0, 0, 1, 0.005, -0.1, 0.1);
+  Tum = 2*Tum + 0.2;
+  static PID pCarVel (ia / (2*g*Tum), 0, 0, 1, 0.005);
+  Tum = 2*Tum;
+  static PID pCarPos (1 / (2*Tum), 0, 0, 1, 0.005);
+  
+  float carX = -over.getCarX ();
+  float carVel = -over.getCarVel ();
+  float motorSetPoint = pCarVel.tick (pCarPos.tick (setPoint - carX) - carVel);
 
-  motor.setU (u);
+  float motorAngle = over.getMotorTheta ();
+  float motorVel = over.getMotorVel ();
+  float u = piVel.tick (pPos.tick (motorSetPoint - motorAngle) - motorVel);
 
-  // Serial.print ("micros = ");
+  // over. (u);
+
   // Serial.print (micros ());
-  Serial.print (", voltage = ");
-  Serial.print (u);
-  Serial.print (", vel = ");
-  Serial.print (motorVel);
-  Serial.print (", pos = ");
-  Serial.print (motorAngle);
+  // Serial.print ('\t');
+  Serial.print (carX);
+  Serial.print ('\t');
+  Serial.print (carVel);
+  Serial.print ('\t');
+  // Serial.print (motorAngle);
+  // Serial.print ('\t');
+  // Serial.print (motorVel);
+  // Serial.print ('\t');
   Serial.println ();
+}
+
+void setup()
+{
+  Serial.begin (115200);
+
+  pinMode (BUTTON, INPUT_PULLUP);
+
+  overlord.init (controller);
+}
+
+void loop ()
+{
+  overlord.tick ();
 }

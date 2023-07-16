@@ -14,6 +14,8 @@
 class PID
 {
 private:
+    float u; /*!< Последнее рассчитанное значение выхода */
+
     float Kp; /*!< Коэффициент П */
     float Ki; /*!< Коэффициент И */
     float Kd; /*!< Коэффициент Д */
@@ -47,6 +49,12 @@ public:
      */
     float tick (float err);
 
+    /**
+     * @brief Получить последнее значение выхода звена
+     * @return u
+     */
+    float getLast () { return u; }
+
     bool isSatEnabled () { return isSat; }
 };
 
@@ -70,7 +78,7 @@ PID::PID(float Kp_, float Ki_, float Kd_, float T_, float Ts_,
 float PID::tick (float err)
 {
     float d = (err - Id) / T;
-    float u = Kp * err + Ii + d;
+    u = Kp * err + Ii + d;
 
     if (isSat && u == constrain (u, satLo, satHi))
     {
