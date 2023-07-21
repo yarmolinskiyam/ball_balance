@@ -1,6 +1,6 @@
 /**
  * @file overlord.h
- * @author your name (you@domain.com)
+ * @author 
  * @brief Модуль-надзиратель для взаимодействия с железом и с функционалом оценки попытки
  * @version 0.1
  * @date 2023-07-16
@@ -12,16 +12,24 @@
 #include "motor.h"
 #include "carriage.h"
 #include "slider.h"
+#include "led.h"
 
-Motor *motor;
+enum class SliderEnum
+{
+    setPoint = 0,
+    prog1 = 1,
+    prog2 = 2
+};
 
+extern Motor *motor;
+    
 class Overlord
 {
 private:
 
     /*!v Эти значения можно изменять */
-    static float constexpr trackLength = 36; /*!< Длина пути в сантиметрах */
-    static float constexpr carLength = 6; /*!< Длина вагона в сантиметрах */
+    static float constexpr trackLength = 43; /*!< Длина пути в сантиметрах */
+    static float constexpr carLength = 9; /*!< Длина вагона в сантиметрах */
 
     static const uint8_t ticksPerRev = 48; /*!< Количество тиков энкодера на оборот */
     static const uint8_t gearboxRatio = 47; /*!< Передаточное отношение редуктора */
@@ -39,14 +47,15 @@ private:
     Overlord (Overlord&) = delete;
     Overlord (Overlord&&) = delete;
 
-    // Motor *motor;
+    LedManager *ledManager;
+
     Carriage *car;
 
     static const size_t sliderCount = 3;
     Slider **sliders;
 
-    static float constexpr Ts = 0.005; /*!< Интервал квантования регулятора */
-    static const unsigned long Tsmicros = 5000; /*!< Интервал квантования в мкс */
+    static float constexpr Ts = 0.006; /*!< Интервал квантования регулятора */
+    static const unsigned long Tsmicros = 6000; /*!< Интервал квантования в мкс */
 
     void (*controller) (Overlord &);
 
@@ -57,6 +66,8 @@ private:
 
     unsigned long timer;
 
+    size_t timeTick = 0;
+
 public:
 
     /**
@@ -64,13 +75,6 @@ public:
      * @return Ссылка на объект Overlord
      */
     static Overlord& getInstance ();
-
-    enum class SliderEnum
-    {
-        setPoint = 0,
-        prog1 = 1,
-        prog2 = 2
-    };
 
     /**
      * @brief Инициализировать наздиратель
@@ -132,6 +136,12 @@ public:
     float getMotorVel () { return motor->getAngleVel (); }
 
     /**
+     * @brief Выдать напряжение на двигатель
+     * @param [in] u Требуемое напряжение на двигателе в вольтах
+     */
+    void setMotorU (float u) { motor->setU (u); }
+
+    /**
      * @brief Сделать один шаг работы надзирателя
      * @note Вызывать раз в 5мс!
      * @details В режиме попытки вызывает функцию реализации регулятора и выдает
@@ -139,67 +149,3 @@ public:
      */
     void tick ();
 };
-
-Overlord::Overlord()
-{
-    static Carriage car_ (trackLength, carLength);
-    static Motor motor_ (ticksPerRev, gearboxRatio);
-
-    static Slider slider0 (A0);
-    static Slider slider1 (A1);
-    static Slider slider2 (A2);
-
-    static Slider *sliders_[sliderCount] =
-    {
-        &slider0,
-        &slider1,
-        &slider2
-    };
-
-    sliders = sliders_;
-
-    sliders[static_cast<int> (SliderEnum::setPoint)]->setSlider (-200, 200);
-    
-    car = &car_;
-    motor = &motor_;
-
-    timer = micros ();
-}
-
-Overlord& Overlord::getInstance ()
-{
-    static Overlord overlord;
-    return overlord;
-}
-
-void Overlord::init (void (*controller_) (Overlord &))
-{
-    controller = controller_;
-}
-
-float Overlord::getSetpoint ()
-{
-    return sliders[static_cast<int> (SliderEnum::setPoint)]->getValue () * 0.001;
-}
-
-void Overlord::tick ()
-{
-    /*!v Эта переменная будет false если итерация цикла больше периода квантования */
-    bool isTimeOk = false;
-    while (micros () - timer < Tsmicros) isTimeOk = true;
-
-    if (!isTimeOk)
-    {
-        unsigned long mcrs = micros ();
-        Serial.print ("ПРЕВЫШЕН ПЕРИОД КВАНТОВАНИЯ НА [мкс]: ");
-        Serial.println (mcrs - timer - Tsmicros);
-    }
-    timer = micros ();
-
-    motor->update ();
-    car->update ();
-    controller (*this);
-
-    float err = getSetpoint () - car->getX ();
-    integralError += err*err * Ts; 
-}

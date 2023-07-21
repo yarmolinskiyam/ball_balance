@@ -7,6 +7,7 @@
 #include <stdint.h>
 #include <Ultrasonic.h>
 #include "pid.h"
+#include "moving_avg.h"
 
 /**
  * @brief Класс для определения положения вагона на рельсах
@@ -20,14 +21,14 @@ private:
     int32_t halfCarLenght; /*!< Половина длины вагона */
     int32_t halfTrackLength; /*!< Половина длины пути */
 
-    Ultrasonic *sonarL; /*!< Указатель на сонар*/
+    Ultrasonic *sonarL; /*!< Указатель на левый сонар*/
+    Ultrasonic *sonarR; /*!< Указатель на правый сонар*/
 
-    static constexpr float Ts = 0.005; /*!< Период, с которым надо вызывать метод getAngleVel */
-    static constexpr float Tvel = 0.01; /*!< Постоянная времени фильтра скорости */
-    static constexpr float Tpos = 0.01; /*!< Постоянная времени фильтра положения */
+    static constexpr float Ts = 0.006; /*!< Период, с которым надо вызывать метод getAngleVel */
+    static constexpr float Tvel = 0.1; /*!< Постоянная времени фильтра скорости */
 
     PID *velFilter; /*!< Реальное дифференцирующее звено */
-    PID *posFilter; /*!< Реальное дифференцирующее звено */
+    SimpleMovingAverage<float, 12> posFilter;
 
 public:
     
@@ -56,25 +57,3 @@ public:
      */
     float getVel () { return x_i; }
 };
-
-Carriage::Carriage (uint32_t trackLength, uint32_t carLength)
-{
-    static Ultrasonic sonarL_ (7, 6, 1000000/330);
-    sonarL = &sonarL_;
-
-    halfTrackLength = trackLength / 2;
-    halfCarLenght = carLength / 2;
-    
-    static PID dv (0, 0, 1, Tvel, Ts);
-    velFilter = &dv;
-    static PID dp (0, 1/Tpos, 0, 1, Ts);
-    posFilter = &dp;
-}
-
-void Carriage::update ()
-{
-    // x = posFilter->tick ((sonarL->readf () - halfTrackLength - halfCarLenght) * 0.01);
-    x = (sonarL->read () - halfTrackLength - halfCarLenght) * 0.01;
-    // x = posFilter->tick (x - posFilter->getLast ());
-    x_i = velFilter->tick (x);
-}
