@@ -35,14 +35,14 @@ void controllerTick (Overlord &over)
 
     /*!v Регулятор положения вагончика */
     static float err4, x_i0;
-    static float constexpr Kp4 = 2.08;
+    static float constexpr Kp4 = 2.08333;
     err4 = setPoint - x;
     x_i0 = err4 * Kp4;
 
 
     /*!v Регулятор скорости вагончика */
     static float err3, theta_0;
-    static float constexpr Kp3 = 1.9;
+    static float constexpr Kp3 = 1.9113;
     err3 = x_i0 - x_i;
     theta_0 = err3 * Kp3;
     if (theta_0 > 0.5){
@@ -64,7 +64,7 @@ void controllerTick (Overlord &over)
     /*!v Регулятор скорости мотора */
     static float err1, u;
     static float constexpr Kp1 = 2.22;
-    static float constexpr Ki1 = 27.7;
+    static float constexpr Ki1 = 29;
     static float constexpr u_min = -9;
     static float constexpr u_max = 9;
 
@@ -91,7 +91,7 @@ else
     /*!v Выдача напряжения на мотор */
     over.setMotorU(u);
 
-    /*!v Вывод отладочной информации */
+    // /*!v Вывод отладочной информации */
     
     // Serial.print (setPoint  *100);
     // Serial.print('\t');

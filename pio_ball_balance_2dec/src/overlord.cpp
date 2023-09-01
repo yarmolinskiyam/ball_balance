@@ -44,8 +44,8 @@ void Overlord::init (void (*controller_) (Overlord &))
 
 float Overlord::getSetpoint ()
 {
-    // return (int8_t)pgm_read_byte(&setPointArray[timeTick]) * 0.001;
-    return sliders[static_cast<int> (SliderEnum::setPoint)]->getValue () * 0.001;
+    return (int8_t)pgm_read_byte(&setPointArray[timeTick]) * 0.001;
+    // return -sliders[static_cast<int> (SliderEnum::setPoint)]->getValue () * 0.001;
 }
 
 void Overlord::tick ()
